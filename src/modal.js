@@ -10,25 +10,25 @@ const InlineModal = (function(){
             if(x && y){
                 x = x +'px';
                 y= y +'px';
-                $('.absolute').css('top', y);
-                $('.absolute').css('left', x);
+                $('#modal.inline').css('top', y);
+                $('#modal.inline').css('left', x);
             }
 
-            $('.absolute').css("display","block");
+            $('#modal.inline').css("display","block");
         },
 
         hide: function(){
-            $('.absolute').css("display", "none");
+            $('#modal.inline').css("display", "none");
             //setTimeout(() => $('body').removeClass('has-modal-jr', 100));
         },
 
         render: function(vNode){
-            document.getElementById('absolute').innerHtml = "";
-            document.getElementById('absolute').appendChild(createElement(vNode));
+            document.getElementById('modal').innerHtml = "";
+            document.getElementById('modal').appendChild(createElement(vNode));
         },
 
         renderHtml: function(html){
-            document.getElementById('absolute').innerHTML = html;
+            document.getElementById('modal').innerHTML = html;
         },
 
         html: function(html){
@@ -45,7 +45,7 @@ const InlineModal = (function(){
 
         this.root = document.createElement("div");
         this.root.setAttribute("id",selector);
-        this.root.setAttribute("class","modal");
+        this.root.setAttribute("class","modal inline");
         document.querySelector("body").appendChild(this.root);
     }
 

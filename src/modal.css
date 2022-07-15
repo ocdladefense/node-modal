@@ -1,4 +1,4 @@
-.absolute{
+#modal.inline {
     position:absolute;
     top: 150px;             
     left: 200px;             
@@ -9,13 +9,3 @@
     background-color: blanchedalmond;
     display:none;
 }
-.box{
- display: none;
-    width: 100%;
-}
-
-a:hover + .box,.box:hover{
-    display: block;
-    position: relative;
-    z-index: 100;
-            }
