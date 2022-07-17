@@ -1,56 +1,45 @@
-
+/** @jsx vNode */
 export { InlineModal };
+import { ModalComponent } from "./components.js";
+import { vNode, View } from "../../view/view.js";
 
-const InlineModal = (function(){
+var InlineModal = function () {
+  var proto = {
+    show: function show(x, y) {
+      if (x && y) {
+        x = x + 'px';
+        y = y + 'px';
+        $('#modal.inline-modal').css('top', y);
+        $('#modal.inline-modal').css('left', x);
+      }
 
-
-    let proto = {
-        show: function(x,y){
-
-            if(x && y){
-                x = x +'px';
-                y= y +'px';
-                $('#modal.inline').css('top', y);
-                $('#modal.inline').css('left', x);
-            }
-
-            $('#modal.inline').css("display","block");
-        },
-
-        hide: function(){
-            $('#modal.inline').css("display", "none");
-            //setTimeout(() => $('body').removeClass('has-modal-jr', 100));
-        },
-
-        render: function(vNode){
-            document.getElementById('modal').innerHtml = "";
-            document.getElementById('modal').appendChild(createElement(vNode));
-        },
-
-        renderHtml: function(html){
-            document.getElementById('modal').innerHTML = html;
-        },
-
-        html: function(html){
-            this.renderHtml(html);
-        },
-
-        getRoot: function() {
-            return this.root;
-        }
-    }; 
-
-
-    function inlineModal(selector) {
-
-        this.root = document.createElement("div");
-        this.root.setAttribute("id",selector);
-        this.root.setAttribute("class","modal inline");
-        document.querySelector("body").appendChild(this.root);
+      $('#modal.inline-modal').css("display", "block");
+    },
+    hide: function hide() {
+      $('#modal.inline-modal').css("display", "none"); //setTimeout(() => $('body').removeClass('has-modal-jr', 100));
+    },
+    render: function render(vNode) {
+      document.getElementById('modal').innerHtml = "";
+      document.getElementById('modal').appendChild(View.createElement(vNode));
+    },
+    renderHtml: function renderHtml(html) {
+      document.getElementById('modal').innerHTML = html;
+    },
+    html: function html(_html) {
+      this.renderHtml(_html);
+    },
+    getRoot: function getRoot() {
+      return this.root;
     }
+  };
 
-    inlineModal.prototype = proto;
+  function InlineModal(selector) {
+    this.root = View.createElement(vNode(ModalComponent, {
+      id: selector
+    }));
+    document.querySelector("body").appendChild(this.root);
+  }
 
-    return inlineModal;
-})();
-
+  InlineModal.prototype = proto;
+  return InlineModal;
+}();
