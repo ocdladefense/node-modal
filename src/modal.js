@@ -11,14 +11,14 @@ var InlineModal = function () {
       if (x && y) {
         x = x + 'px';
         y = y + 'px';
-        $('#modal.inline-modal').css('top', y);
-        $('#modal.inline-modal').css('left', x);
+        $('#' + this.id).css('top', y);
+        $('#' + this.id).css('left', x);
       }
 
-      $('#modal.inline-modal').css("display", "block");
+      $('#' + this.id).css("display", "block");
     },
     hide: function hide() {
-      $('#modal.inline-modal').css("display", "none"); //setTimeout(() => $('body').removeClass('has-modal-jr', 100));
+      $('#' + this.id).css("display", "none"); //setTimeout(() => $('body').removeClass('has-modal-jr', 100));
     },
     render: function render(vNode) {
       document.getElementById('modal').innerHtml = "";
@@ -37,6 +37,7 @@ var InlineModal = function () {
 
   function InlineModal(selector) {
     this.root = View.createElement(<ModalComponent id={selector} />);
+    this.id = selector;
     document.querySelector("body").appendChild(this.root);
   }
 
