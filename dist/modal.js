@@ -23,7 +23,7 @@ var InlineModal = function () {
       document.getElementById('modal').appendChild(View.createElement(vNode));
     },
     renderHtml: function renderHtml(html) {
-      document.querySelector('#' + this.selector + '.modal-content').innerHTML = html;
+      document.querySelector('#' + this.selector + ' .modal-content').innerHTML = html;
     },
     html: function html(_html) {
       this.renderHtml(_html);
