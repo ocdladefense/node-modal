@@ -8,10 +8,10 @@ import { vNode } from "../../view/view.js";
 
 var ModalComponent = function ModalComponent(props) {
   return vNode("div", {
-    "class": "modal container",
+    "class": "modal container arrow",
     id: props.id
   }, vNode("div", {
-    "class": "modal inline-modal"
+    "class": "modal inline-modal "
   }, vNode("div", {
     "class": "modal-content"
   }, "Some modal content.")));
