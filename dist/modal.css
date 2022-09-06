@@ -8,19 +8,31 @@
     padding-right: 25px;
 
     
-    
 }
 
 .modal.container.arrow {
     margin-top: 0px;
 }
 
-.modal.container.arrow::before {
+.modal.container.arrow-top::before {
     content: "";
     position: absolute;
     top: 50%;
     left: 35px;
     margin-top: -140px;
+    border-top: none;
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    border-bottom: 15px solid white;
+    z-index: 1;
+}
+
+.modal.container.arrow-bottom::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 35px;
+    margin-top: 140px;
     border-top: none;
     border-right: 15px solid transparent;
     border-left: 15px solid transparent;

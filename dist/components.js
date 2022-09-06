@@ -8,7 +8,7 @@ import { vNode } from "../../view/view.js";
 
 var ModalComponent = function ModalComponent(props) {
   return vNode("div", {
-    "class": "modal container arrow",
+    "class": "modal container arrow-top",
     id: props.id
   }, vNode("div", {
     "class": "modal inline-modal "
