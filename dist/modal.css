@@ -30,13 +30,13 @@
 .modal.container.arrow-bottom::before {
     content: "";
     position: absolute;
-    top: 50%;
+    top: 100%;
     left: 35px;
-    margin-top: 140px;
-    border-top: none;
+    margin-top: -15px;
+    border-top: 15px solid white;
     border-right: 15px solid transparent;
     border-left: 15px solid transparent;
-    border-bottom: 15px solid white;
+    border-bottom: none;
     z-index: 1;
 }
 

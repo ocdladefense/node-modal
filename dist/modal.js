@@ -25,6 +25,9 @@ var InlineModal = function () {
     renderHtml: function renderHtml(html) {
       document.querySelector('#' + this.selector + ' .modal-content').innerHTML = html;
     },
+    flipArrow: function flipArrow(name){
+      this.root.className = "modal container arrow-" + name;
+    },
     html: function html(_html) {
       this.renderHtml(_html);
     },
