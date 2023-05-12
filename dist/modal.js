@@ -1,49 +1,67 @@
-/** @jsx vNode */
-export { InlineModal };
-import { ModalComponent } from "./components.js";
-import { vNode, View } from "../../view/view.js";
+/*
 
-var InlineModal = function () {
-  var proto = {
-    show: function show(x, y) {
-      if (x && y) {
-        x = x + 'px';
-        y = y + 'px';
-        $('#' + this.selector).css('top', y);
-        $('#' + this.selector).css('left', x);
-      }
+modal.renderHtml("<h1>Hello World!</h1>");
+modal.show();
 
-      $('#' + this.selector).css("display", "block");
-    },
-    hide: function hide() {
-      $('#' + this.selector).css("display", "none"); //setTimeout(() => $('body').removeClass('has-modal-jr', 100));
-    },
-    render: function render(vNode) {
-      document.getElementById('modal').innerHtml = "";
-      document.getElementById('modal').appendChild(View.createElement(vNode));
-    },
-    renderHtml: function renderHtml(html) {
-      document.querySelector('#' + this.selector + ' .modal-content').innerHTML = html;
-    },
-    flipArrow: function flipArrow(name){
-      this.root.className = "modal container arrow-" + name;
-    },
-    html: function html(_html) {
-      this.renderHtml(_html);
-    },
-    getRoot: function getRoot() {
-      return this.root;
+*/
+export { Modal };
+
+const Modal = (function() {
+    let proto = {
+
+        show: function(){
+            $('body').addClass("has-modal");
+            $("body").addClass("loading");
+            setTimeout(() => $("#modal").addClass("fullscreen"), 100);
+        },
+        
+        
+        hide: function() {
+            $("#modal").removeClass("fullscreen")
+            setTimeout(() => $('body').removeClass('has-modal'), 100);
+        },
+        
+        
+        render: function(vNode){
+            document.getElementById('modal-content').innerHTML = "";
+            document.getElementById('modal-content').appendChild(createElement(vNode));
+        },
+
+        
+        renderHtml: function(html, targetId) {
+            $("body").removeClass("loading");
+            document.getElementById(targetId || "modal-content").innerHTML = html;
+        },
+
+        titleBar: function(html) {
+            document.getElementById("modal-title-bar-content").innerHTML = html;
+            var selector = document.getElementById("dropdown");
+            selector.addEventListener("change", ()=> {console.log("Dropdown Selected")});
+
+            var closeBtn = document.getElementById("close-modal");
+            closeBtn.addEventListener("click", ()=>{modal.hide()});
+        },
+
+        toc: function(html) {
+            document.getElementById("ors-toc").innerHTML = html;
+        },
+        
+        
+        html: function(html) {
+            this.renderHtml(html);
+        },
+
+       
+        
+    };
+
+
+    function OrsModal() {
+    
     }
-  };
 
-  function InlineModal(selector) {
-    this.root = View.createElement(vNode(ModalComponent, {
-      id: selector
-    }));
-    this.selector = selector;
-    document.querySelector("body").appendChild(this.root);
-  }
+    OrsModal.prototype = proto;
 
-  InlineModal.prototype = proto;
-  return InlineModal;
-}();
+    return OrsModal;
+
+})();
