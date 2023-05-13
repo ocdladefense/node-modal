@@ -3,9 +3,9 @@
 /**
  * This is our list of components to be used in the app.
 */
-export { ModalComponent };
-import { vNode } from "../../view/view.js";
 
+export { ModalComponent };
+import { vNode } from '../../view/view.js';
 var ModalComponent = function ModalComponent(props) {
   return vNode("div", {
     "class": "modal container arrow-top",
