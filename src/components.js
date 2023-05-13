@@ -6,7 +6,7 @@
 
 
 export { ModalComponent };
-import { vNode } from '~/view/view.js';
+import { vNode } from '../../view/view.js';
 
 
 

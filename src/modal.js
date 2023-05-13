@@ -6,6 +6,7 @@ modal.show();
 */
 export { Modal };
 
+
 const Modal = (function() {
     let proto = {
 

@@ -1,8 +1,8 @@
 /** @jsx vNode */
 
 export { InlineModal };
-import { ModalComponent } from "./components";
-import { vNode, View} from "~/view/view.js";
+import { ModalComponent } from "./components.js";
+import { vNode, View} from "../../view/view.js";
 
 
 var InlineModal = function () {
