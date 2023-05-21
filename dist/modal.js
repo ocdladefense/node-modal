@@ -5,7 +5,6 @@ modal.show();
 
 */
 export { OrsModal };
-
 var OrsModal = function () {
   var proto = {
     show: function show() {
@@ -47,9 +46,7 @@ var OrsModal = function () {
       this.renderHtml(_html);
     }
   };
-
   function OrsModal() {}
-
   OrsModal.prototype = proto;
   return OrsModal;
 }();
