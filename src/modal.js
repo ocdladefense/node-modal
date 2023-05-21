@@ -4,9 +4,10 @@ modal.renderHtml("<h1>Hello World!</h1>");
 modal.show();
 
 */
-export { OrsModal };
+export { Modal };
 
-const OrsModal = (function() {
+
+const Modal = (function() {
     let proto = {
 
         show: function(){
@@ -56,12 +57,12 @@ const OrsModal = (function() {
     };
 
 
-    function OrsModal() {
+    function Modal() {
     
     }
 
-    OrsModal.prototype = proto;
+    Modal.prototype = proto;
 
-    return OrsModal;
+    return Modal;
 
 })();
