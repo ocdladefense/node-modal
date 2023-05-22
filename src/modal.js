@@ -23,9 +23,9 @@ const Modal = (function() {
         },
         
         
-        render: function(vNode){
-            document.getElementById('modal-content').innerHTML = "";
-            document.getElementById('modal-content').appendChild(createElement(vNode));
+        render: function(vnode){
+            document.getElementById("modal-content").innerHTML = "";
+            document.getElementById("modal-content").appendChild(View.createElement(vnode));
         },
 
         
@@ -43,17 +43,18 @@ const Modal = (function() {
             closeBtn.addEventListener("click", ()=>{modal.hide()});
         },
 
-        toc: function(html) {
-            document.getElementById("ors-toc").innerHTML = html;
+        title: function(text) {
+            document.getElementById("modal-title-bar-title").innerHTML = text;
+        },
+
+        leftNav: function(html) {
+            document.getElementById("modal-left-nav").innerHTML = html;
         },
         
         
         html: function(html) {
             this.renderHtml(html);
-        },
-
-       
-        
+        }
     };
 
 
@@ -64,5 +65,4 @@ const Modal = (function() {
     Modal.prototype = proto;
 
     return Modal;
-
 })();

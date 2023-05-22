@@ -4,8 +4,8 @@ modal.renderHtml("<h1>Hello World!</h1>");
 modal.show();
 
 */
-export { OrsModal };
-var OrsModal = function () {
+export { Modal };
+var Modal = function () {
   var proto = {
     show: function show() {
       $('body').addClass("has-modal");
@@ -20,9 +20,9 @@ var OrsModal = function () {
         return $('body').removeClass('has-modal');
       }, 100);
     },
-    render: function render(vNode) {
-      document.getElementById('modal-content').innerHTML = "";
-      document.getElementById('modal-content').appendChild(createElement(vNode));
+    render: function render(vnode) {
+      document.getElementById("modal-content").innerHTML = "";
+      document.getElementById("modal-content").appendChild(View.createElement(vnode));
     },
     renderHtml: function renderHtml(html, targetId) {
       $("body").removeClass("loading");
@@ -39,14 +39,17 @@ var OrsModal = function () {
         modal.hide();
       });
     },
-    toc: function toc(html) {
-      document.getElementById("ors-toc").innerHTML = html;
+    title: function title(text) {
+      document.getElementById("modal-title-bar-title").innerHTML = text;
+    },
+    leftNav: function leftNav(html) {
+      document.getElementById("modal-left-nav").innerHTML = html;
     },
     html: function html(_html) {
       this.renderHtml(_html);
     }
   };
-  function OrsModal() {}
-  OrsModal.prototype = proto;
-  return OrsModal;
+  function Modal() {}
+  Modal.prototype = proto;
+  return Modal;
 }();
