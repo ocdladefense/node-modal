@@ -14,8 +14,8 @@ const InlineModalComponent = function(props) {
 
 
   return (
-    <div class="modal container arrow-top" id={props.id}>
-      <div class="modal inline-modal">
+    <div class="modal inline-modal" id={props.id}>
+      <div class="modal-container">
         <div class="modal-content">
           Loading...
         </div>
