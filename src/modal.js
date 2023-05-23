@@ -23,9 +23,10 @@ const Modal = (function() {
         },
         
         
-        render: function(vnode){
-            document.getElementById("modal-content").innerHTML = "";
-            document.getElementById("modal-content").appendChild(View.createElement(vnode));
+        render: function(html){
+            let vnode =  <ModalComponent content={html} />;
+            let node = View.createElement(vnode);
+            document.body.appendChild(createElement(vNode));
         },
 
         
@@ -66,3 +67,30 @@ const Modal = (function() {
 
     return Modal;
 })();
+
+const ModalComponent = function(props){
+    let content = props.content;
+    return (
+    <div id="modal-backdrop">
+            <div id="modal">
+                <div id="modal-container" style="overflow-y:visible;"> 
+                    <div id="modal-body" style="vertical-align:top;">
+                        <div id="modal-title-bar">
+                            <button style="float:right;" id="close-modal" type="button">X</button>
+                            <div id="modal-title-bar-title"></div>
+                        </div>
+                        <div id="modal-left-nav" class="modal-toc" style="display:inline-block;width:25%; vertical-align:top;overflow-y:auto;overflow-y: auto;position: sticky;max-height: 600px;padding-right:25px;">
+
+                        </div>
+                        <div id="modal-content" style="display:inline-block; width:74%; vertical-align:top; overflow-y: auto; overflow-y: auto; max-height: 600px; padding: 35px;">
+                        {content}
+                        </div>
+                    </div>
+                </div>
+                <div id="loading">
+                    <div id="loading-wheel"></div>
+                </div>
+            </div>  
+        </div>
+    )
+};
