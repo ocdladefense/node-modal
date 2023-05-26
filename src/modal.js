@@ -1,37 +1,38 @@
+/** @jsx vNode */
 /*
 
 modal.renderHtml("<h1>Hello World!</h1>");
 modal.show();
 
 */
-export { Modal };
+import {vNode,View} from "../../../node_modules/@ocdladefense/view/view.js";
+export { Modal, ModalComponent };
 
 
 const Modal = (function() {
     let proto = {
 
         show: function(){
-            $('body').addClass("has-modal");
-            $("body").addClass("loading");
-            setTimeout(() => $("#modal").addClass("fullscreen"), 100);
+            document.body.addClass("has-modal");
+            document.body.addClass("loading");
+            setTimeout(() => document.getElementById("modal").addClass("fullscreen"), 100);
         },
         
         
         hide: function() {
-            $("#modal").removeClass("fullscreen")
-            setTimeout(() => $('body').removeClass('has-modal'), 100);
+            document.getElementById("modal").removeClass("fullscreen")
+            setTimeout(() => document.body.removeClass('has-modal'), 100);
         },
         
         
         render: function(html){
             let vnode =  <ModalComponent content={html} />;
             let node = View.createElement(vnode);
-            document.body.appendChild(createElement(vNode));
         },
 
         
         renderHtml: function(html, targetId) {
-            $("body").removeClass("loading");
+            document.body.removeClass("loading");
             document.getElementById(targetId || "modal-content").innerHTML = html;
         },
 
@@ -60,7 +61,8 @@ const Modal = (function() {
 
 
     function Modal() {
-    
+        this.body = document.body;
+        this.modal = document.getElementById("modal");
     }
 
     Modal.prototype = proto;

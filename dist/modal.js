@@ -1,31 +1,35 @@
+/** @jsx vNode */
 /*
 
 modal.renderHtml("<h1>Hello World!</h1>");
 modal.show();
 
 */
-export { Modal };
+import { vNode, View } from "../../../node_modules/@ocdladefense/view/view.js";
+export { Modal, ModalComponent };
 var Modal = function () {
   var proto = {
     show: function show() {
-      $('body').addClass("has-modal");
-      $("body").addClass("loading");
+      document.body.addClass("has-modal");
+      document.body.addClass("loading");
       setTimeout(function () {
-        return $("#modal").addClass("fullscreen");
+        return document.getElementById("modal").addClass("fullscreen");
       }, 100);
     },
     hide: function hide() {
-      $("#modal").removeClass("fullscreen");
+      document.getElementById("modal").removeClass("fullscreen");
       setTimeout(function () {
-        return $('body').removeClass('has-modal');
+        return document.body.removeClass('has-modal');
       }, 100);
     },
-    render: function render(vnode) {
-      document.getElementById("modal-content").innerHTML = "";
-      document.getElementById("modal-content").appendChild(View.createElement(vnode));
+    render: function render(html) {
+      var vnode = vNode(ModalComponent, {
+        content: html
+      });
+      var node = View.createElement(vnode);
     },
     renderHtml: function renderHtml(html, targetId) {
-      $("body").removeClass("loading");
+      document.body.removeClass("loading");
       document.getElementById(targetId || "modal-content").innerHTML = html;
     },
     titleBar: function titleBar(html) {
@@ -49,7 +53,43 @@ var Modal = function () {
       this.renderHtml(_html);
     }
   };
-  function Modal() {}
+  function Modal() {
+    this.body = document.body;
+    this.modal = document.getElementById("modal");
+  }
   Modal.prototype = proto;
   return Modal;
 }();
+var ModalComponent = function ModalComponent(props) {
+  var content = props.content;
+  return vNode("div", {
+    id: "modal-backdrop"
+  }, vNode("div", {
+    id: "modal"
+  }, vNode("div", {
+    id: "modal-container",
+    style: "overflow-y:visible;"
+  }, vNode("div", {
+    id: "modal-body",
+    style: "vertical-align:top;"
+  }, vNode("div", {
+    id: "modal-title-bar"
+  }, vNode("button", {
+    style: "float:right;",
+    id: "close-modal",
+    type: "button"
+  }, "X"), vNode("div", {
+    id: "modal-title-bar-title"
+  })), vNode("div", {
+    id: "modal-left-nav",
+    "class": "modal-toc",
+    style: "display:inline-block;width:25%; vertical-align:top;overflow-y:auto;overflow-y: auto;position: sticky;max-height: 600px;padding-right:25px;"
+  }), vNode("div", {
+    id: "modal-content",
+    style: "display:inline-block; width:74%; vertical-align:top; overflow-y: auto; overflow-y: auto; max-height: 600px; padding: 35px;"
+  }, content))), vNode("div", {
+    id: "loading"
+  }, vNode("div", {
+    id: "loading-wheel"
+  }))));
+};
