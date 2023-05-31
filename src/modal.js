@@ -13,26 +13,32 @@ const Modal = (function() {
     let proto = {
 
         show: function(){
-            document.body.addClass("has-modal");
-            document.body.addClass("loading");
-            setTimeout(() => document.getElementById("modal").addClass("fullscreen"), 100);
+            document.body.classList.add("has-modal");
+            document.body.classList.add("loading");
+            setTimeout(() => document.getElementById("modal").classList.add("fullscreen"), 100);
         },
         
         
         hide: function() {
-            document.getElementById("modal").removeClass("fullscreen")
-            setTimeout(() => document.body.removeClass('has-modal'), 100);
+            //document.getElementById("modal").classList.remove("fullscreen")
+            setTimeout(() => document.body.classList.remove('has-modal'), 100);
         },
         
         
         render: function(html){
+            //if modal exists
+            let modalElement = document.getElementById("modal");
+            if(modalElement != null){
+                modalElement.remove();
+            }
             let vnode =  <ModalComponent content={html} />;
             let node = View.createElement(vnode);
+            document.body.appendChild(node);
         },
 
         
         renderHtml: function(html, targetId) {
-            document.body.removeClass("loading");
+            document.body.classList.remove("loading");
             document.getElementById(targetId || "modal-content").innerHTML = html;
         },
 
@@ -40,9 +46,6 @@ const Modal = (function() {
             document.getElementById("modal-title-bar-content").innerHTML = html;
             var selector = document.getElementById("dropdown");
             selector.addEventListener("change", ()=> {console.log("Dropdown Selected")});
-
-            var closeBtn = document.getElementById("close-modal");
-            closeBtn.addEventListener("click", ()=>{modal.hide()});
         },
 
         title: function(text) {
@@ -56,13 +59,27 @@ const Modal = (function() {
         
         html: function(html) {
             this.renderHtml(html);
+        },
+
+        handleEvent: function(e){
+            console.log(e.type);
+            let target = e.target;
+            if(!["close-modal", "modal-backdrop"].includes(target.id)){
+                return false;
+            }
+
+            e.preventDefault();
+            this.hide();
+            
         }
     };
 
 
     function Modal() {
         this.body = document.body;
-        this.modal = document.getElementById("modal");
+        //this.modal = document.getElementById("modal");
+        
+        document.addEventListener("click", this);
     }
 
     Modal.prototype = proto;

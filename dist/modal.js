@@ -10,26 +10,32 @@ export { Modal, ModalComponent };
 var Modal = function () {
   var proto = {
     show: function show() {
-      document.body.addClass("has-modal");
-      document.body.addClass("loading");
+      document.body.classList.add("has-modal");
+      document.body.classList.add("loading");
       setTimeout(function () {
-        return document.getElementById("modal").addClass("fullscreen");
+        return document.getElementById("modal").classList.add("fullscreen");
       }, 100);
     },
     hide: function hide() {
-      document.getElementById("modal").removeClass("fullscreen");
+      //document.getElementById("modal").classList.remove("fullscreen")
       setTimeout(function () {
-        return document.body.removeClass('has-modal');
+        return document.body.classList.remove('has-modal');
       }, 100);
     },
     render: function render(html) {
+      //if modal exists
+      var modalElement = document.getElementById("modal");
+      if (modalElement != null) {
+        modalElement.remove();
+      }
       var vnode = vNode(ModalComponent, {
         content: html
       });
       var node = View.createElement(vnode);
+      document.body.appendChild(node);
     },
     renderHtml: function renderHtml(html, targetId) {
-      document.body.removeClass("loading");
+      document.body.classList.remove("loading");
       document.getElementById(targetId || "modal-content").innerHTML = html;
     },
     titleBar: function titleBar(html) {
@@ -37,10 +43,6 @@ var Modal = function () {
       var selector = document.getElementById("dropdown");
       selector.addEventListener("change", function () {
         console.log("Dropdown Selected");
-      });
-      var closeBtn = document.getElementById("close-modal");
-      closeBtn.addEventListener("click", function () {
-        modal.hide();
       });
     },
     title: function title(text) {
@@ -51,11 +53,22 @@ var Modal = function () {
     },
     html: function html(_html) {
       this.renderHtml(_html);
+    },
+    handleEvent: function handleEvent(e) {
+      console.log(e.type);
+      var target = e.target;
+      if (!["close-modal", "modal-backdrop"].includes(target.id)) {
+        return false;
+      }
+      e.preventDefault();
+      this.hide();
     }
   };
   function Modal() {
     this.body = document.body;
-    this.modal = document.getElementById("modal");
+    //this.modal = document.getElementById("modal");
+
+    document.addEventListener("click", this);
   }
   Modal.prototype = proto;
   return Modal;
