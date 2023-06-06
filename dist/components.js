@@ -6,13 +6,13 @@
 
 export { InlineModalComponent };
 import { vNode } from '../../view/view.js';
-var InlineModalComponent = function InlineModalComponent(props) {
+const InlineModalComponent = function (props) {
   return vNode("div", {
-    "class": "modal inline-modal",
+    class: "modal inline-modal",
     id: props.id
   }, vNode("div", {
-    "class": "modal-container"
+    class: "modal-container"
   }, vNode("div", {
-    "class": "modal-content"
+    class: "modal-content"
   }, "Loading...")));
 };

@@ -5,58 +5,54 @@ modal.renderHtml("<h1>Hello World!</h1>");
 modal.show();
 
 */
-import { vNode, View } from "../../../node_modules/@ocdladefense/view/view.js";
+import { vNode, View } from "../../view/view.js";
 export { Modal, ModalComponent };
-var Modal = function () {
-  var proto = {
-    show: function show() {
+const Modal = function () {
+  let proto = {
+    show: function () {
       document.body.classList.add("has-modal");
       document.body.classList.add("loading");
-      setTimeout(function () {
-        return document.getElementById("modal").classList.add("fullscreen");
-      }, 100);
+      setTimeout(() => document.getElementById("modal").classList.add("fullscreen"), 100);
     },
-    hide: function hide() {
+    hide: function () {
       //document.getElementById("modal").classList.remove("fullscreen")
-      setTimeout(function () {
-        return document.body.classList.remove('has-modal');
-      }, 100);
+      setTimeout(() => document.body.classList.remove('has-modal'), 100);
     },
-    render: function render(html) {
+    render: function (html) {
       //if modal exists
-      var modalElement = document.getElementById("modal");
+      let modalElement = document.getElementById("modal");
       if (modalElement != null) {
         modalElement.remove();
       }
-      var vnode = vNode(ModalComponent, {
+      let vnode = vNode(ModalComponent, {
         content: html
       });
-      var node = View.createElement(vnode);
+      let node = View.createElement(vnode);
       document.body.appendChild(node);
     },
-    renderHtml: function renderHtml(html, targetId) {
+    renderHtml: function (html, targetId) {
       document.body.classList.remove("loading");
       document.getElementById(targetId || "modal-content").innerHTML = html;
     },
-    titleBar: function titleBar(html) {
+    titleBar: function (html) {
       document.getElementById("modal-title-bar-content").innerHTML = html;
       var selector = document.getElementById("dropdown");
-      selector.addEventListener("change", function () {
+      selector.addEventListener("change", () => {
         console.log("Dropdown Selected");
       });
     },
-    title: function title(text) {
+    title: function (text) {
       document.getElementById("modal-title-bar-title").innerHTML = text;
     },
-    leftNav: function leftNav(html) {
+    leftNav: function (html) {
       document.getElementById("modal-left-nav").innerHTML = html;
     },
-    html: function html(_html) {
-      this.renderHtml(_html);
+    html: function (html) {
+      this.renderHtml(html);
     },
-    handleEvent: function handleEvent(e) {
+    handleEvent: function (e) {
       console.log(e.type);
-      var target = e.target;
+      let target = e.target;
       if (!["close-modal", "modal-backdrop"].includes(target.id)) {
         return false;
       }
@@ -73,8 +69,8 @@ var Modal = function () {
   Modal.prototype = proto;
   return Modal;
 }();
-var ModalComponent = function ModalComponent(props) {
-  var content = props.content;
+const ModalComponent = function (props) {
+  let content = props.content;
   return vNode("div", {
     id: "modal-backdrop"
   }, vNode("div", {
@@ -95,7 +91,7 @@ var ModalComponent = function ModalComponent(props) {
     id: "modal-title-bar-title"
   })), vNode("div", {
     id: "modal-left-nav",
-    "class": "modal-toc",
+    class: "modal-toc",
     style: "display:inline-block;width:25%; vertical-align:top;overflow-y:auto;overflow-y: auto;position: sticky;max-height: 600px;padding-right:25px;"
   }), vNode("div", {
     id: "modal-content",

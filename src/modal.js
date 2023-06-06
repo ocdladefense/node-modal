@@ -5,7 +5,7 @@ modal.renderHtml("<h1>Hello World!</h1>");
 modal.show();
 
 */
-import {vNode,View} from "../../../node_modules/@ocdladefense/view/view.js";
+import {vNode,View} from "../../view/view.js";
 export { Modal, ModalComponent };
 
 
